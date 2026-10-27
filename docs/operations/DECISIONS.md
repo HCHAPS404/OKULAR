@@ -10,7 +10,7 @@
 | D6 | Public-facing brand OKULAR | Pending legal review | KDE naming/mark and applicable trademark search |
 | D7 | Commercial buyer segment | Hypothesis | interviews and actual willingness to pilot |
 | D8 | Model and evaluation claims | Pending | holdout by scenario, false positives and harm review |
-| D9 | Release lockfiles | Pending | resolve registry dependencies and green CI |
+| D9 | Release lockfiles | Implemented in bootstrap PR | pin and update with dependency PR/green CI |
 | D10 | GitHub branch protection | Pending repo setting | owner configures settings/rulesets |
 | D11 | Hackathon exact submission rules | Pending verification | organizer final instructions |
 

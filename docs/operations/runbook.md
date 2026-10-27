@@ -6,7 +6,7 @@ Python 3.11+ (CI uses 3.12); uv; Node 22; pnpm 9. No model API account necessary
 ## Local start
 1. Clone repo and \`cd OKULAR\`.
 2. \`cp .env.example apps/web/.env.local\` (sample environment contains no secrets).
-3. \`make bootstrap\` (uv + pnpm dependencies; requires internet). No lockfiles are committed yet; generate and commit \`uv.lock\` and \`pnpm-lock.yaml\` once versions are resolved and CI green.
+3. \`make bootstrap\` (uv + pnpm dependencies; requires internet). Dependency lockfiles are committed under services/api/uv.lock and pnpm-lock.yaml; installs use locked/frozen modes. Update them via controlled dependency PR.
 4. Terminal A: \`make api\` (http://127.0.0.1:8000).
 5. Terminal B: \`make web\` (http://localhost:3000).
 6. Submit a synthetic example only. CORS defaults to http://localhost:3000.
@@ -38,4 +38,4 @@ Expected: \`engine_mode=offline_rules_demo\`, empty \`external_checks\`, explici
 - Rollback: revert offending PR, redeploy last known-good commit, disable provider/verification feature; document incident.
 
 ## Production readiness blockers
-No deploy URL, no real Meta adapter, no verified source, no lockfiles, no public auth/rate limit, no tenancy, no independent user safety evaluation. These are intentional explicit blockers, not hidden incomplete work.
+No deploy URL, no real Meta adapter, no verified source, no public auth/rate limit, no tenancy, no independent user safety evaluation. These are intentional explicit blockers, not hidden incomplete work.

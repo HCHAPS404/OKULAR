@@ -1,9 +1,9 @@
 .PHONY: bootstrap dev api web test lint eval build smoke
 
 bootstrap:
-	uv sync --project services/api --extra dev
+	uv sync --project services/api --extra dev --locked
 	corepack enable
-	pnpm install --no-frozen-lockfile
+	pnpm install --frozen-lockfile
 
 api:
 	uv run --project services/api uvicorn okular.main:app --host 127.0.0.1 --port 8000 --reload
