@@ -1,3 +1,5 @@
+[![CI](https://github.com/HCHAPS404/OKULAR/actions/workflows/ci.yml/badge.svg)](https://github.com/HCHAPS404/OKULAR/actions/workflows/ci.yml)
+
 # OKULAR
 
 **OKULAR is a user-controlled safety checkpoint for risky digital decisions.**
@@ -8,7 +10,7 @@ Before someone sends money, credentials, documents, or sensitive information, OK
 
 ## Project status
 
-OKULAR is in **bootstrap**. The initial README preceded code. A new foundation branch now contains a typed FastAPI API, versioned assessment contract, synthetic regression fixtures, a responsive web interface and CI configuration. This is an **offline rules demonstrator** only: no Meta inference, independent verification source, browser monitoring or production deployment has been proven. See the linked PR and build log before treating any part as complete.
+OKULAR is in **bootstrap**. The initial README preceded code. The main branch now contains a typed FastAPI API, versioned assessment contract, synthetic regression fixtures, a responsive web interface and CI configuration. This is an **offline rules demonstrator** only: no Meta inference, independent verification source, browser monitoring or production deployment has been proven. See the linked PR and build log before treating any part as complete.
 
 This README defines the product direction and integration strategy. It does not claim that the capabilities below already work.
 
@@ -106,7 +108,7 @@ Native mobile apps, continuous monitoring, all-channel inbox access, account his
 
 ## Development status and contribution
 
-The repository began with an initial README. A bootstrap foundation branch proposes the web/API scaffold, shared schema, health endpoints, CI and synthetic fixtures. Check the PR/CI status to distinguish committed code from validated execution.
+The repository began with an initial README. The bootstrap foundation was merged through [PR #1](https://github.com/HCHAPS404/OKULAR/pull/1). It includes web/API scaffold, schema, health endpoints, CI and synthetic fixtures. GitHub CI passed on the merge commit; model inference, independent verification and public deployment remain unimplemented.
 
 Every feature must be described as implemented only after its acceptance criteria and checks have been demonstrated. Report model/provider failures and missing verification sources honestly.
 
@@ -125,7 +127,7 @@ Every feature must be described as implemented only after its acceptance criteri
 To be selected and documented before publishing implementation code.
 
 
-## Developer foundation (bootstrap branch)
+## Developer foundation (main)
 
 See [documentation index](docs/README.md), [full OKULAR V4 vision](docs/master/OKULAR-mega-prompt-maestro-v4-integral.md), [branch workflow](docs/engineering/BRANCHES.md), [workstream ownership](docs/engineering/WORKSTREAMS.md), and [runbook](docs/operations/runbook.md).
 
