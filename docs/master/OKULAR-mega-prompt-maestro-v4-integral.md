@@ -1,3 +1,5 @@
+> **Aviso de gobernanza:** la decisión posterior del fundador adopta 14 ramas permanentes \`area/*\`. Donde el texto histórico V4 indique ramas cortas únicamente, prevalecen [ADR-002](../architecture/ADR-002-permanent-branches.md) y [BRANCHES](../engineering/BRANCHES.md). No se eliminó contenido V4.
+
 # OKULAR — MEGA PROMPT MAESTRO V4 INTEGRAL
 
 **Estado:** especificación documental ampliada; **no** representa software implementado.

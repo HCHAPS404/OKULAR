@@ -1,47 +1,89 @@
-# Git branches — how every OKULAR discipline works
+# OKULAR — Política oficial de ramas permanentes
 
-## Verified starting point
-On 2026-10-26 only \`main\` existed on GitHub, containing the product README. The bootstrap branch \`chore/BOOT-001-foundation-monorepo\` was merged into \`main\` through PR #1 after green CI. The branch may remain temporarily as history. The workstream names below are **conventions and examples, not pre-existing branches**.
+**Estado: activa (decisión del fundador, 26-10-2026).** Especificación técnica: [ADR-002](../architecture/ADR-002-permanent-branches.md). Este documento prevalece sobre las instrucciones históricas de ramas cortas en V4, que se conservan por trazabilidad.
 
-## Primary rule: GitHub Flow
-\`main\` = reviewed, demo-capable branch. **No permanent \`frontend\`, \`backend\`, \`data\`, \`dev\` or \`develop\`**. A one-person startup benefits from short-lived isolated work per issue instead of long-lived branches that drift. Agents may work in separate git worktrees but never write the same contract files concurrently.
+## Política
 
-## Prefixes by workstream
+- \`main\` es la única rama de integración estable: recibe exclusivamente cambios revisados y con CI aprobado.
+- Existen **14 ramas permanentes por área \`area/*\`**, creadas desde la misma base de \`main\`. Se usan para desarrollar cada parte del monorepo.
+- Las ramas permanentes **nunca se eliminan al fusionar**. Después de mergear en \`main\` se actualizan con la nueva historia.
+- Existen ramas auxiliares opcionales \`task/<area>/<issue>\` para aislar trabajos incompletos simultáneos; no sustituyen las ramas \`area/*\`.
+- Una rama Git contiene todo el repositorio, no solamente una carpeta. La tabla define responsabilidades, no aislamiento automático.
+- La existencia de una rama **no significa** que el módulo esté desarrollado, desplegado o validado.
 
-| Workstream | Branch example | Owned scope | Acceptance / primary tests |
+## Registro de ramas
+
+| Rama permanente | Responsabilidad | Directorios primarios | Issues |
 |---|---|---|---|
-| Foundation | \`chore/BOOT-001-foundation-monorepo\` | repo docs/config | smoke + CI |
-| Contracts | \`feat/CON-001-assessment-schema\` | packages/contracts | consumer schema/API tests |
-| Frontend | \`feat/WEB-001-checkpoint-ui\` | apps/web | build, typecheck, keyboard checks |
-| Backend | \`feat/API-001-assessment-endpoint\` | services/api | pytest + security |
-| Model / AI | \`feat/AI-001-meta-adapter\` | outbound/model/evals | real synthetic smoke + benchmark |
-| Data / Evals | \`feat/DATA-001-eval-fixtures\` | data, evals | tests, provenance, no PII |
-| Verification | \`feat/VER-001-evidence-receipts\` | verifier registry/adapters | allowlist, provenance, timeout |
-| Security | \`security/SEC-001-ssrf-guards\` | policies/security tests | exploit regression |
-| Infrastructure | \`chore/OPS-001-ci-deploy\` | .github, infra, config | CI, deployment smoke |
-| Browser Guardian | \`feat/EXT-001-selected-tab\` | apps/extension | minimal permissions, opt-in |
-| Mobile | \`feat/MOB-001-share-entry\` | apps/mobile | permission/device checks |
-| Documentation | \`docs/DOC-001-playbooks\` | docs | links/accuracy review |
-| Fixes | \`fix/API-002-consent-validation\` | scoped bug | reproduction regression |
-| Release | \`release/0.1.0-rc1\` | optional only when needed | release gate |
+| `area/frontend` | Web y UI/UX | apps/web | `WEB` |
+| `area/backend` | API y dominio | services/api | `API` |
+| `area/contracts` | Esquemas y contratos | packages/contracts | `CON` |
+| `area/data` | Datos y fixtures | data, evals/fixtures | `DATA` |
+| `area/ai` | Modelos, prompts e inferencia | services/api/okular/adapters/outbound, evals | `AI` |
+| `area/verification` | Fuentes y evidencia verificable | services/api/okular/adapters/outbound | `VER` |
+| `area/security` | Ciberseguridad, privacidad y abuso | docs/security, SECURITY.md, PRIVACY.md | `SEC` |
+| `area/infrastructure` | CI/CD, hosting, entorno, dependencias | Makefile, .github, docs/operations | `OPS` |
+| `area/guardian` | Extensión y navegación consentida | apps/extension (futuro) | `EXT` |
+| `area/mobile` | Apps móviles y compartir | apps/mobile (futuro) | `MOB` |
+| `area/platform` | API y SDK B2B | packages/ts-client (futuro) | `PLAT` |
+| `area/qa` | Pruebas integradas, casos adversariales | services/api/tests, evals, tests/e2e | `QA` |
+| `area/documentation` | README, guías, ADR y prompts | docs, README.md, AGENTS.md | `DOC` |
+| `area/research` | Investigación, mercado, negocio | docs/business, docs/research | `BUS` |
 
-## Ordering: what depends on what?
-Contract -> API baseline -> web UI -> contract tests -> evaluator -> external verifier -> Meta AI adapter -> Guardian/SDK. Work can overlap only when stable contracts exist. Data packs depend on valid source/locale; business claims depend on observed evals and user research. Do not spin up all branches in advance.
+Se mantienen por separado los dominios del código y los Situation Packs: Home, Identity, Web, Social, Work, Commerce, Finance, Web3 y Response no necesitan una rama exclusiva para existir; se desarrollan a través de \`area/backend\`, \`area/frontend\`, \`area/ai\`, \`area/verification\` y \`area/data\`.
 
-## One task / one branch / one PR
-1. Create Issue with description, risks, files, owner, dependencies and acceptance.
-2. \`git switch main && git pull --ff-only\`
-3. \`git switch -c feat/WEB-002-<short-name>\` (choose actual Issue ID)
-4. Make smallest coherent change, test \`make test\`, \`make eval\`, \`make lint\` as applicable.
-5. \`git push -u origin <branch>\`, open PR targeting \`main\`.
-6. Review diff, CI, privacy and change to contracts; squash merge; delete merged branch.
-7. Sync local \`main\`; stop/rebase other branches if the contract changed.
+## Flujo cuando un área está lista para integrar
 
-## Agent coordination
-One writer per issue/file. If two agents must build frontend and backend in parallel, finalize and merge contract first. Handoffs must list: issue, branch/SHA, touched files, commands *actually* run, evidence, missing tests, risks, owner. Founder's approval is required for public deploy, data collection, external actions and merges.
+1. Abrir/seleccionar Issue con dueño, criterios de aceptación, rutas y riesgos.
+2. Trabajar y hacer commits en la rama \`area/<dominio>\`; no tocar \`main\` directamente.
+3. La rama del área puede conservar trabajo en progreso, pero **el PR solamente se abre si todos los cambios que aparezcan en su diff están terminados**. Para varios trabajos incompletos, crear \`task/<dominio>/<issue>\` y fusionarlos al área cuando estén listos.
+4. Sincronizar con \`main\` antes de PR; revisar y resolver conflictos, ejecutar API, evaluación, seguridad, lint, build y pruebas pertinentes.
+5. Abrir PR \`area/<dominio> → main\`. Revisar cambios, consentimientos, contratos, citas verificables, pruebas reales y límites.
+6. Usar **merge commit (Create a merge commit)** en vez de squash/rebase por defecto, para conservar el linaje de la rama permanente. Un PR verde no equivale a autorización para desplegar a usuarios.
+7. **No borrar la rama**. Una vez integrado el PR, actualizar la rama desde el nuevo \`main\`: normalmente fast-forward.
+8. Actualizar las demás ramas de área desde \`main\` antes de empezar tareas nuevas o abrir PRs; nunca forzar pushes ni resetear commits ajenos.
+9. Permisos y protecciones GitHub (Rulesets, bloquear force-push/borrado, exigir PR/checks) deben configurarse y verificarse por el propietario; este documento **no afirma** que ya estén activados.
+10. Para ramas permanentes, desactivar en la configuración del repositorio la opción **Automatically delete head branches**, si está habilitada.
 
-## Protection and emergency
-Recommend PR review/check requirements on \`main\` where plan/settings allow; rulesets were NOT configured by this bootstrap. No force-push to main. A hotfix is a short \`fix/*\` branch off current main, with test and PR. A revert is safer than silent history rewriting.
+## Comandos para una rama permanente
 
-## Practical git worktrees (optional)
-\`git worktree add ../okular-web -b feat/WEB-001-checkpoint-ui main\`; another branch/worktree for API after contract merge. Do not assume worktrees enforce shared database isolation; avoid concurrent dependencies/lockfile changes.
+Primera vez:
+
+\`\`\`bash
+git clone https://github.com/HCHAPS404/OKULAR.git
+cd OKULAR
+git fetch origin
+git switch --track origin/area/frontend
+# trabajar, probar y registrar commits
+git push origin area/frontend
+\`\`\`
+
+Después de un PR **ya fusionado mediante merge commit**:
+
+\`\`\`bash
+git fetch origin
+git switch area/frontend
+git merge --ff-only origin/main
+git push origin area/frontend
+\`\`\`
+
+Cuando \`--ff-only\` falle, hay commits propios sin integrar o divergencia. No usar \`reset --hard\`. Revisar historia y resolver un \`git merge origin/main\` seguro, comprobando todos los archivos y ejecutando pruebas. El script \`scripts/sync-area.sh\` facilita ese flujo, sin forzar pushes y sin empujar por sí solo.
+
+**Las ramas no se fusionan directamente entre áreas** en ausencia de acuerdo sobre contratos. El orden recomendado: \`area/contracts\` → \`main\` → actualización de \`area/backend\` y \`area/frontend\`; después \`area/data\` + \`area/ai\` + \`area/qa\`; verificaciones y seguridad; finalmente producto integrado.
+
+## Colaboración humano y agentes
+
+- Una persona/agente responsable por Issue/ruta a la vez; no modificar el mismo esquema de dos sesiones paralelas.
+- Cursor/Claude/GPT reciben rama, Issue, paths, contrato, pruebas y límites. Informan commit, pruebas realmente ejecutadas y bloqueos.
+- Ningún agente fuerza pushes, borra ramas, fusiona cambios incompletos ni despliega sin autorización pertinente.
+- \`main\` se mantiene verificable; todas las ramas deben conservar disciplina de calidad aunque existan permanentemente.
+
+## CI
+
+\`push\` en \`main\` y \`area/**\`, todos los PR y \`workflow_dispatch\` activan jobs web/API. Reglas de \`main\` y \`area/*\` son configuración de GitHub adicional, pendiente de comprobar.
+
+## Historial
+
+Las ramas anteriores \`chore/BOOT-001-foundation-monorepo\` y \`docs/DOC-001-bootstrap-status\` pertenecen al bootstrap ya integrado: son históricas, no ramas de área. Las 14 \`area/*\` permanecen incluso cuando todavía no se ha programado su primer módulo.
+
+Para roadmap y herramientas por dominio: [WORKSTREAMS](WORKSTREAMS.md), [ADR-002](../architecture/ADR-002-permanent-branches.md).

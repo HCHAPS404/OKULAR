@@ -18,7 +18,8 @@
 
 ## Flujo para agentes
 - Inspeccionar rama, Issue y diff antes de cambiar.
-- Crear rama corta por Issue, nunca ramas permanentes por área. \`main\` es estable.
+- Trabajar por Issue en una rama permanente \`area/<dominio>\`; \`main\` estable. Ver ADR-002 y BRANCHES.md. Para trabajo paralelo o WIP: rama auxiliar \`task/<dominio>/<issue>\`.
+- No borrar \`area/*\` al fusionar; sincronizarla con \`main\` después del PR y usar merge commit como estrategia normal.
 - Definir alcance, archivos afectados, contrato, tests y aceptación.
 - No editar contrato JSON compartido de forma concurrente con otro agente.
 - Cambiar solo lo propio; ejecutar los comandos disponibles; informar los que no se ejecutaron.

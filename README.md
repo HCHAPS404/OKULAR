@@ -147,4 +147,4 @@ make build
 
 Current API includes \`GET /healthz\`, \`GET /readyz\`, \`GET /v1/capabilities\` and \`POST /v1/assessments\`. The endpoint provides **synthetic/offline rule-based guidance**; \`external_checks\` is empty until a real verifier is implemented. No model was connected or benchmarked merely by committing these files.
 
-**Engineering policy:** only \`main\` is stable; create short-lived issue-scoped branches, not permanent departmental \`frontend\`/\`backend\`/\`data\` branches. See [BRANCHES](docs/engineering/BRANCHES.md).
+**Current engineering policy (ADR-002):** \`main\` is stable and 14 permanent \`area/*\` branches divide frontend, backend, contracts, data, AI, verification, security, infrastructure, Guardian, mobile, platform, QA, documentation and research. Merge completed milestones via PR; **do not delete** the area branch. See [BRANCHES](docs/engineering/BRANCHES.md) and [ADR-002](docs/architecture/ADR-002-permanent-branches.md).
