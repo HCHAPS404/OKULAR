@@ -1,0 +1,14 @@
+{
+  "name": "okular",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "dev": "pnpm --dir apps/web dev",
+    "build": "pnpm --dir apps/web build",
+    "lint": "pnpm --dir apps/web lint",
+    "typecheck": "pnpm --dir apps/web typecheck",
+    "test:api": "uv run --project services/api --extra dev pytest services/api/tests",
+    "eval": "uv run --project services/api --extra dev python evals/run_evals.py"
+  }
+}

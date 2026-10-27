@@ -1,0 +1,48 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+      - name: Install Python dependencies
+        run: uv sync --project services/api --extra dev
+      - name: Unit / API / contract tests
+        run: uv run --project services/api --extra dev pytest services/api/tests -q
+      - name: Synthetic regression
+        run: uv run --project services/api --extra dev python evals/run_evals.py
+      - name: Python lint
+        run: uv run --project services/api --extra dev ruff check services/api evals
+
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+      - name: Install frontend
+        run: pnpm install --no-frozen-lockfile
+      - name: Typecheck
+        run: pnpm --dir apps/web typecheck
+      - name: Lint
+        run: pnpm --dir apps/web lint
+      - name: Build
+        run: pnpm --dir apps/web build
+        env:
+          NEXT_PUBLIC_OKULAR_API_BASE_URL: http://localhost:8000
