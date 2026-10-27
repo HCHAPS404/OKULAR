@@ -1,0 +1,27 @@
+name: Implementation task
+description: Scoped task with verification and dependencies
+title: "[AREA] "
+labels: ["kind:feature"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Workstream
+      options: [frontend, backend, contracts, ai, data, verification, security, infra, extension, mobile, docs, business]
+    validations: { required: true }
+  - type: textarea
+    id: problem
+    attributes:
+      label: Goal / problem
+      description: What user or engineering need does this solve?
+    validations: { required: true }
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Verifiable tests, not implementation hype
+    validations: { required: true }
+  - type: textarea
+    id: deps
+    attributes:
+      label: Dependencies, files, privacy and rollback

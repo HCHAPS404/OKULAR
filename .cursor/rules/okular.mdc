@@ -1,0 +1,5 @@
+---
+description: OKULAR repository-wide safety and implementation policy
+alwaysApply: true
+---
+Read AGENTS.md and docs/engineering/BRANCHES.md before edits. The V4 master specification is vision, not proof of features. Follow the evidence/unknown/privacy rules and short-lived feature branches. Never invent external verification or model output.
