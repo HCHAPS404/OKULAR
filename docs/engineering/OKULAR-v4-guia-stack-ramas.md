@@ -1,3 +1,5 @@
+> **Cambio posterior a V4:** el fundador adoptó ramas permanentes `area/*`. Este documento se conserva íntegro como referencia histórica; prevalecen [BRANCHES](BRANCHES.md) y [ADR-002](../architecture/ADR-002-permanent-branches.md).
+
 # OKULAR — Guía de ingeniería, stack y ramas (extracto V4)
 
 La fuente maestra es `OKULAR-mega-prompt-maestro-v4-integral.md`. Las decisiones aquí son propuestas de ingeniería; no se han creado ramas ni archivos en GitHub.

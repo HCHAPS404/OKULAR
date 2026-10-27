@@ -24,3 +24,5 @@
 - Future implementation PRs link issue, change, actual tests, limits and user-impact risk. CI passing is necessary but not proof of production safety.
 
 This log supersedes earlier provisional descriptions in the archived V4 text; preserve that master document intact for historical context.
+
+- 2026-10-26: por decisión del fundador se adopta ADR-002: 14 ramas permanentes `area/*`, sincronizadas desde `main` y preservadas tras cada PR. El workflow valida pushes en `area/**`. El inventario debe verificarse en GitHub después de crearlas.

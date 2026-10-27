@@ -1,33 +1,43 @@
-# Workstreams, owners, stack, tasks and deliverables
+# OKULAR — Workstreams y stack asignados a ramas permanentes
 
-**Solo founder** is accountable for all workstreams; AI tools are assistants, not separate project owners or reviewers. Keep one issue per deliverable and merge through main.
+El fundador es responsable de todas las áreas; los agentes de IA colaboran. Cada rama `area/*` permanece en GitHub después de integrar a `main`. No se considera funcional un módulo por tener su rama creada.
 
-| Area | Code/docs | Stack | Bootstrap deliverable | Next tasks | Gate |
-|---|---|---|---|---|---|
-| Product | docs/product | Markdown, experiments | MVP + pack matrix | user tests and country/source selection | clear job/action |
-| Frontend | apps/web | Next.js 15, React 19, TS, Tailwind 4 | text checkpoint UI | accessibility, responsive QA, receipts UI | build/types/E2E |
-| Backend | services/api | Python 3.11+, FastAPI, Pydantic 2 | endpoints + offline rules | external verification, errors, quotas | pytest + contract |
-| Domain/contracts | packages/contracts | JSON Schema v2020-12 | assessment response v1 | versioned request schema/codegen | cross-app tests |
-| Data | data | synthetic JSON, registry metadata | no personal data | source policy, annotations, dataset splits | provenance/privacy |
-| AI/ML | services/api/adapters, evals | replaceable model provider | *offline only* baseline | Meta adapter after verified access, calibrated eval | benchmark/safety |
-| Verification | services/api/adapters | allowlisted HTTP source adapters | none yet | independent receipt, country sources | verifiable provenance |
-| Security | docs/security + API tests | threat model, OWASP, CI | boundaries, consent | SSRF limits/rate limits/adversarial | no severe failure |
-| Infra/DevOps | .github, Makefile, hosting | GitHub Actions, uv, pnpm | CI workflow and runbook | pinned lockfiles, environments, preview deploy | green CI + smoke |
-| Browser Guardian | apps/extension (future) | Manifest V3, TS | not started | selected-tab click-to-analyze | permission review |
-| Mobile | apps/mobile (future) | Expo/RN | not started | share intent and privacy UX | native device QA |
-| Platform B2B | packages/ts-client (future) | OpenAPI, auth, quotas | not started | tenant-scoped pilot APIs | partner contract |
-| Business | docs/business | interviews, unit economics | assumptions documented | validate first buyer, costs, legal/IP | evidence of demand |
+| Rama | Responsabilidad | Rutas | Issue |
+|---|---|---|---|
+| `area/frontend` | Web y UI/UX | apps/web | `WEB` |
+| `area/backend` | API y dominio | services/api | `API` |
+| `area/contracts` | Esquemas y contratos | packages/contracts | `CON` |
+| `area/data` | Datos y fixtures | data, evals/fixtures | `DATA` |
+| `area/ai` | Modelos, prompts e inferencia | services/api/okular/adapters/outbound, evals | `AI` |
+| `area/verification` | Fuentes y evidencia verificable | services/api/okular/adapters/outbound | `VER` |
+| `area/security` | Ciberseguridad, privacidad y abuso | docs/security, SECURITY.md, PRIVACY.md | `SEC` |
+| `area/infrastructure` | CI/CD, hosting, entorno, dependencias | Makefile, .github, docs/operations | `OPS` |
+| `area/guardian` | Extensión y navegación consentida | apps/extension (futuro) | `EXT` |
+| `area/mobile` | Apps móviles y compartir | apps/mobile (futuro) | `MOB` |
+| `area/platform` | API y SDK B2B | packages/ts-client (futuro) | `PLAT` |
+| `area/qa` | Pruebas integradas, casos adversariales | services/api/tests, evals, tests/e2e | `QA` |
+| `area/documentation` | README, guías, ADR y prompts | docs, README.md, AGENTS.md | `DOC` |
+| `area/research` | Investigación, mercado, negocio | docs/business, docs/research | `BUS` |
 
-## Interface contracts
-- Browser talks only to documented versioned API.
-- API owns validation, safety policy, verification semantics and response.
-- Domain does not depend on Next.js or provider SDK.
-- Data ingestion cannot collect content without purpose and permission.
-- The first external verification must have source, time, method, receipt ID and failure semantics before being shown as "checked".
-- Every feature that uses a model must declare provider, model, prompt version, latency, token cost, failure behavior and evaluation results.
+## Herramientas y gates por especialidad
 
-## Entry criteria for a new workstream
-Business case, permission/legal basis, bounded interface, synthetic test path, error handling, cost/time ceiling, acceptance and rollback plan.
+- **Frontend:** Next.js 15, React 19, TypeScript, Tailwind, ESLint; build, typecheck, usabilidad y E2E en `area/frontend`.
+- **Backend:** Python/FastAPI/Pydantic, pytest y seguridad de API en `area/backend`.
+- **Contratos:** JSON Schema/OpenAPI y compatibilidad entre TS/Python en `area/contracts`.
+- **Data:** datos sintéticos, procedencia, etiquetas y retención en `area/data`. Sin conversaciones reales por defecto.
+- **IA:** proveedor Meta condicionado a acceso y condiciones verificados, adaptadores y evaluación en `area/ai`; no suponer modelo ya integrado.
+- **Verificación:** fuentes oficiales/autorizadas, receipts tipados, fechas, límites y fallos `unknown` en `area/verification`.
+- **Seguridad:** OWASP, abuso de API, SSRF, inyección, privacidad y respuesta a incidentes en `area/security`.
+- **Infraestructura:** GitHub Actions, uv/pnpm/lockfiles, configuración y deploy con controles en `area/infrastructure`.
+- **Guardian:** Manifest V3 y análisis por intervención autorizada en `area/guardian`. Nada de monitorización oculta.
+- **Móvil:** capacidades nativas, Expo/React Native y permisos oficiales en `area/mobile`.
+- **Plataforma:** API/SDK B2B con autenticación, tenancy y cuotas en `area/platform`.
+- **QA:** Pytest, Playwright, tests contractuales/adversariales, regresiones y falsos positivos en `area/qa`.
+- **Documentación:** contratos, ADR, normas de agentes y roadmap en `area/documentation`.
+- **Investigación:** pruebas con usuarios consentidos, análisis de mercado, validación comercial y riesgos legales en `area/research`.
 
-## Definition of Done
-Implementation is committed; local/CI tests are reported truthfully; known limits documented; no PII/secrets or false claims; contracts compatible; UI understandable; PR accepted. Folder names alone do NOT count.
+Los cambios de una área pueden afectar rutas de otras: debe haber Issue, revisión del contrato y coordinación. Los cambios compartidos pueden originarse en el área más adecuada, pero no escribirse en paralelo sin acuerdo. Las ramas permanentes no crean automáticamente un monorepo multicapa: éste ya existe y cada rama representa una línea de trabajo.
+
+## Definición de terminado
+
+El PR para `main` debe presentar diff completo, estado de contratos, tests documentados, CI verde, límites y privacidad, costo/latencia cuando aplique, aprobación del fundador, y criterio de rollback. No mezclar funciones a medio terminar. Después del merge, mantener y actualizar la rama.
