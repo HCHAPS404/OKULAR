@@ -1,7 +1,7 @@
 # Git branches — how every OKULAR discipline works
 
 ## Verified starting point
-On 2026-10-26 only \`main\` existed on GitHub, containing the product README. This bootstrap is prepared on \`chore/BOOT-001-foundation-monorepo\`. The workstream names below are **conventions and examples, not pre-existing branches**.
+On 2026-10-26 only \`main\` existed on GitHub, containing the product README. The bootstrap branch \`chore/BOOT-001-foundation-monorepo\` was merged into \`main\` through PR #1 after green CI. The branch may remain temporarily as history. The workstream names below are **conventions and examples, not pre-existing branches**.
 
 ## Primary rule: GitHub Flow
 \`main\` = reviewed, demo-capable branch. **No permanent \`frontend\`, \`backend\`, \`data\`, \`dev\` or \`develop\`**. A one-person startup benefits from short-lived isolated work per issue instead of long-lived branches that drift. Agents may work in separate git worktrees but never write the same contract files concurrently.
