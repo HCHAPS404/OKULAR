@@ -5,8 +5,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "services/api"))
-from okular.application.assess import analyze_offline  # noqa: E402
-from okular.domain.models import AssessmentRequest  # noqa: E402
+from okular.application.assess import analyze_offline
+from okular.domain.models import AssessmentRequest
 
 fixtures = json.loads((ROOT / "evals/fixtures/cases.json").read_text(encoding="utf-8"))
 passed = 0

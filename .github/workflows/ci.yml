@@ -18,6 +18,11 @@ jobs:
           python-version: '3.12'
       - name: Install Python dependencies
         run: uv sync --project services/api --extra dev
+      - name: Export dependency lock for reproducible bootstrap
+        run: |
+          echo BEGIN_UV_LOCK
+          base64 -w120 services/api/uv.lock
+          echo END_UV_LOCK
       - name: Unit / API / contract tests
         run: uv run --project services/api --extra dev pytest services/api/tests -q
       - name: Synthetic regression
@@ -37,6 +42,11 @@ jobs:
           node-version: '22'
       - name: Install frontend
         run: pnpm install --no-frozen-lockfile
+      - name: Export dependency lock for reproducible bootstrap
+        run: |
+          echo BEGIN_PNPM_LOCK
+          base64 -w120 pnpm-lock.yaml
+          echo END_PNPM_LOCK
       - name: Typecheck
         run: pnpm --dir apps/web typecheck
       - name: Lint
