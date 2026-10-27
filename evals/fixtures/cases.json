@@ -1,0 +1,34 @@
+[
+  {
+    "id": "home-advance",
+    "scenario": "home",
+    "action_under_consideration": "pay",
+    "text": "Debes pagar el anticipo hoy antes de visitar, no le cuentes a nadie.",
+    "consent": true,
+    "expected_risk": "high_concern"
+  },
+  {
+    "id": "identity-pressure",
+    "scenario": "identity",
+    "action_under_consideration": "share_data",
+    "text": "Soy del banco, envía tu código inmediatamente.",
+    "consent": true,
+    "expected_risk": "high_concern"
+  },
+  {
+    "id": "normal-request",
+    "scenario": "home",
+    "action_under_consideration": "unsure",
+    "text": "Podemos coordinar una visita a la vivienda el próximo lunes.",
+    "consent": true,
+    "expected_risk": "unknown"
+  },
+  {
+    "id": "ambiguous",
+    "scenario": "other",
+    "action_under_consideration": "pay",
+    "text": "Por favor, confirma los detalles de pago en la factura.",
+    "consent": true,
+    "expected_risk": "caution"
+  }
+]

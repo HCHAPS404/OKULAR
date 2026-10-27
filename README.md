@@ -8,7 +8,7 @@ Before someone sends money, credentials, documents, or sensitive information, OK
 
 ## Project status
 
-OKULAR is at the concept and foundation stage. The repository was empty before this initial README. No product feature, integration, model call, or verification source is implemented yet.
+OKULAR is in **bootstrap**. The initial README preceded code. A new foundation branch now contains a typed FastAPI API, versioned assessment contract, synthetic regression fixtures, a responsive web interface and CI configuration. This is an **offline rules demonstrator** only: no Meta inference, independent verification source, browser monitoring or production deployment has been proven. See the linked PR and build log before treating any part as complete.
 
 This README defines the product direction and integration strategy. It does not claim that the capabilities below already work.
 
@@ -106,7 +106,7 @@ Native mobile apps, continuous monitoring, all-channel inbox access, account his
 
 ## Development status and contribution
 
-Development starts from an empty repository. The first engineering milestone is a reproducible web/API scaffold, a shared assessment contract, a health endpoint, CI checks, and synthetic fixtures.
+The repository began with an initial README. A bootstrap foundation branch proposes the web/API scaffold, shared schema, health endpoints, CI and synthetic fixtures. Check the PR/CI status to distinguish committed code from validated execution.
 
 Every feature must be described as implemented only after its acceptance criteria and checks have been demonstrated. Report model/provider failures and missing verification sources honestly.
 
@@ -123,3 +123,26 @@ Every feature must be described as implemented only after its acceptance criteri
 ## License
 
 To be selected and documented before publishing implementation code.
+
+
+## Developer foundation (bootstrap branch)
+
+See [documentation index](docs/README.md), [full OKULAR V4 vision](docs/master/OKULAR-mega-prompt-maestro-v4-integral.md), [branch workflow](docs/engineering/BRANCHES.md), [workstream ownership](docs/engineering/WORKSTREAMS.md), and [runbook](docs/operations/runbook.md).
+
+\`\`\`bash
+cp .env.example apps/web/.env.local
+make bootstrap
+# terminal A
+make api
+# terminal B
+make web
+# checks
+make test
+make eval
+make lint
+make build
+\`\`\`
+
+Current API includes \`GET /healthz\`, \`GET /readyz\`, \`GET /v1/capabilities\` and \`POST /v1/assessments\`. The endpoint provides **synthetic/offline rule-based guidance**; \`external_checks\` is empty until a real verifier is implemented. No model was connected or benchmarked merely by committing these files.
+
+**Engineering policy:** only \`main\` is stable; create short-lived issue-scoped branches, not permanent departmental \`frontend\`/\`backend\`/\`data\` branches. See [BRANCHES](docs/engineering/BRANCHES.md).

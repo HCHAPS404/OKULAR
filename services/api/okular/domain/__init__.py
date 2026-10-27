@@ -1,0 +1,1 @@
+"""Channel-independent assessment domain."""
