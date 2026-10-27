@@ -131,7 +131,7 @@ To be selected and documented before publishing implementation code.
 
 See [documentation index](docs/README.md), [full OKULAR V4 vision](docs/master/OKULAR-mega-prompt-maestro-v4-integral.md), [branch workflow](docs/engineering/BRANCHES.md), [workstream ownership](docs/engineering/WORKSTREAMS.md), and [runbook](docs/operations/runbook.md).
 
-\`\`\`bash
+```bash
 cp .env.example apps/web/.env.local
 make bootstrap
 # terminal A
@@ -143,8 +143,8 @@ make test
 make eval
 make lint
 make build
-\`\`\`
+```
 
-Current API includes \`GET /healthz\`, \`GET /readyz\`, \`GET /v1/capabilities\` and \`POST /v1/assessments\`. The endpoint provides **synthetic/offline rule-based guidance**; \`external_checks\` is empty until a real verifier is implemented. No model was connected or benchmarked merely by committing these files.
+Current API includes `GET /healthz`, `GET /readyz`, `GET /v1/capabilities` and `POST /v1/assessments`. The endpoint provides **synthetic/offline rule-based guidance**; `external_checks` is empty until a real verifier is implemented. No model was connected or benchmarked merely by committing these files.
 
-**Current engineering policy (ADR-002):** \`main\` is stable and 14 permanent \`area/*\` branches divide frontend, backend, contracts, data, AI, verification, security, infrastructure, Guardian, mobile, platform, QA, documentation and research. Merge completed milestones via PR; **do not delete** the area branch. See [BRANCHES](docs/engineering/BRANCHES.md) and [ADR-002](docs/architecture/ADR-002-permanent-branches.md).
+**Current engineering policy (ADR-002):** `main` is stable and 14 permanent `area/*` branches divide frontend, backend, contracts, data, AI, verification, security, infrastructure, Guardian, mobile, platform, QA, documentation and research. Merge completed milestones via PR; **do not delete** the area branch. See [BRANCHES](docs/engineering/BRANCHES.md) and [ADR-002](docs/architecture/ADR-002-permanent-branches.md).

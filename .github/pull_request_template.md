@@ -1,5 +1,5 @@
 ## Branch integration
-Use \`area/<domain>\` → \`main\` with merge commit, and retain/sync the source area branch. Do NOT merge if the PR includes unfinished work. Record conflicts and required cross-domain approvals.
+Use `area/<domain>` → `main` with merge commit, and retain/sync the source area branch. Do NOT merge if the PR includes unfinished work. Record conflicts and required cross-domain approvals.
 
 ## Issue and area
 Closes # (or explain why not yet filed).

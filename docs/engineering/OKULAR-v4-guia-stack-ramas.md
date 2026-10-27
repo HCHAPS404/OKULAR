@@ -1,4 +1,4 @@
-> **Cambio posterior a V4:** el fundador adoptó ramas permanentes \`area/*\`. Este documento se conserva íntegro como referencia histórica; prevalecen [BRANCHES](BRANCHES.md) y [ADR-002](../architecture/ADR-002-permanent-branches.md).
+> **Cambio posterior a V4:** el fundador adoptó ramas permanentes `area/*`. Este documento se conserva íntegro como referencia histórica; prevalecen [BRANCHES](BRANCHES.md) y [ADR-002](../architecture/ADR-002-permanent-branches.md).
 
 # OKULAR — Guía de ingeniería, stack y ramas (extracto V4)
 

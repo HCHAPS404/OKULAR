@@ -9,7 +9,7 @@ El fundador desea disponer desde ahora de ramas visibles para frontend, backend,
 
 ## Decisión
 
-Crear 14 ramas permanentes \`area/*\`, todas desde \`main\`, una por dominio, mantener \`main\` estable, exigir PR y CI, fusionar **con merge commit**, actualizar las ramas del área después. Nunca borrar ramas \`area/*\` automáticamente.
+Crear 14 ramas permanentes `area/*`, todas desde `main`, una por dominio, mantener `main` estable, exigir PR y CI, fusionar **con merge commit**, actualizar las ramas del área después. Nunca borrar ramas `area/*` automáticamente.
 
 ## Consecuencias
 
