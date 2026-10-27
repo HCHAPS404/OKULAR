@@ -497,6 +497,7 @@ Estas condiciones se refieren a fixtures, no a garantía de realidad.
 Empieza inspeccionando el README actual, HEAD, ramas y configuraciones. El repo ya tiene README; no sobrescribirlo con una plantilla genérica y no afirmar que existan carpetas/código que no estén en el HEAD.
 
 Estructura objetivo incremental:
+
 ```text
 OKULAR/
 ├── README.md
@@ -996,6 +997,7 @@ Tipos de nodos: `Case`, `Event`, `Claim`, `ActorRole`, `OrganizationClaim`, `Cha
 Aristas: `stated_by`, `observed_in`, `mentions`, `requests_action`, `claims_affiliation`, `points_to`, `contradicts`, `validated_by`, `derived_from`, `same_case_as`, `supersedes`.
 
 Evita establecer relaciones de identidad fuerte basadas solo en coincidencias de nombres, fotos, frases o direcciones. Un nombre compartido no equivale a ser la misma persona; un destino usado por varios usuarios tampoco implica culpabilidad por sí mismo.
+
 ## 24.4 Correlación segura y deduplicación
 
 - Identificadores internos efímeros por caso; no construir por defecto un grafo global de personas.
@@ -1495,7 +1497,8 @@ Conservar **monolito modular con arquitectura hexagonal**, documentado en V2. No
 
 ## 34.2 Componentes futuros de dominio
 
-```textokular/domain/
+```text
+okular/domain/
   case.py                 # agregados, estados, idempotencia
   event.py                # eventos y procedencia
   claims.py               # afirmaciones y contradicciones
@@ -1994,6 +1997,7 @@ No crear un registro global de «personas sospechosas» ni intercambiar automát
 **Resultado de demo:** observaciones y desconocidos claros; no acusación ni garantía de titularidad.
 
 ## 48.2 Caso B — Banco falso → OTP
+
 1. Un mensaje alega ser del banco.
 2. El usuario lo comparte o el socio observa solicitud en su propio canal.
 3. Identity comprueba incoherencias del remitente/URL con fuentes, si es posible.
@@ -2494,6 +2498,7 @@ Nunca inferir «tiempo real» de una simple extensión; definir `event_source`, 
 
 Cada integración requiere: reproducción en plataforma/version reales, pruebas de permiso y revocación, evaluación de fuga de datos, límites de acceso, restricción de uso, estado desconectado y alternativa manual. Si cualquiera falla, `unsupported`/`manual_only`.
 
+
 # 62. DECISIONES DE STACK COMPLETO — FRONTEND, BACKEND, DATA, IA, MOBILE, DEVOPS
 
 **Madurez: decisiones de arquitectura RECOMENDADAS, sujetas a validar contra runtime, costo, disponibilidad, permisos y requisitos de entrega. No equivalen a instalaciones realizadas.** Este capítulo desarrolla el capítulo 10; no impone dependencias de módulos futuros durante el MVP.
@@ -2992,6 +2997,7 @@ Si surge bloqueo Meta, migrar a `FakeModel` solo como demo de UX y explicitar qu
 - >180 días: red de campañas con evaluación de privacidad, protección proactiva por sitio/partner, colaboración en formato abierto y expansión a más países condicionada.
 
 ## 68.5 Stop criteria de ampliación
+
 Rechazar o posponer un módulo si: no hay fuente verificable, coste supera valor medible, permiso de plataforma es inviable, falsos positivos dañan usuarios, no existe comprador/uso demostrable o requiere almacenar contenido sensible sin justificación. Pivotar por evidencia, no por complejidad acumulada del megaprompt.
 
 # 69. OPERACIÓN FINANCIERA, LICENCIAS Y ELECCIÓN DE PROVEEDORES

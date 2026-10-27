@@ -11,7 +11,7 @@ from okular.domain.models import (
 )
 
 PAYMENT_WORDS = ("anticipo", "depósito", "deposito", "transfer", "pago", "payment", "send money")
-PRESSURE_WORDS = ("urgente", "ahora mismo", "hoy", "10 minutos", "immediately", "today")
+PRESSURE_WORDS = ("urgente", "inmediatamente", "ahora mismo", "hoy", "10 minutos", "immediately", "today")
 SECRECY_WORDS = ("no le cuentes", "no compartas", "secreto", "secret", "keep this private")
 ACCESS_WORDS = ("contraseña", "password", "código", "codigo", "otp", "remote access")
 

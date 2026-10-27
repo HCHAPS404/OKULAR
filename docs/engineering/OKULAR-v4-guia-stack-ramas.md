@@ -498,6 +498,7 @@ Si surge bloqueo Meta, migrar a `FakeModel` solo como demo de UX y explicitar qu
 - H2 (31–90 días): primer piloto con plataforma pequeña, Identity/Commerce según demanda, auth/persistencia si está justificada, SDK beta.
 - H3 (90–180 días): mobile share, mayor cobertura de fuentes, packs Finance/Work/Web3 solo si hay casos y acuerdos; primeros modelos de efectividad con datos autorizados.
 - >180 días: red de campañas con evaluación de privacidad, protección proactiva por sitio/partner, colaboración en formato abierto y expansión a más países condicionada.
+
 ## 68.5 Stop criteria de ampliación
 
 Rechazar o posponer un módulo si: no hay fuente verificable, coste supera valor medible, permiso de plataforma es inviable, falsos positivos dañan usuarios, no existe comprador/uso demostrable o requiere almacenar contenido sensible sin justificación. Pivotar por evidencia, no por complejidad acumulada del megaprompt.
@@ -586,3 +587,4 @@ Estas referencias documentan comportamientos de herramientas o mejores práctica
 - OpenTelemetry — instrumentación Python y minimización: https://opentelemetry.io/docs/languages/python/instrumentation/
 
 Revalidar documentación y características antes de fijar dependencias en el repositorio. El término «verificado» se aplica únicamente a consultas reales, con fuente y fecha. La revisión actual de GitHub se limita a `main`, metadatos y README; no se ha realizado auditoría de código porque el README declara que aún no existe implementación.
+
